@@ -1,0 +1,58 @@
+﻿ptdmitry@pt-linux:~$ mkdir hw_dockerfile
+ptdmitry@pt-linux:~$ cd hw_dockerfile
+ptdmitry@pt-linux:~/hw_dockerfile$ vi hello.py
+ptdmitry@pt-linux:~/hw_dockerfile$ vi dockerfile
+
+FROM python:latest
+COPY lello.py /
+ENTRYPOINT ["python3", "./hello.py"]
+
+ptdmitry@pt-linux:~/hw_dockerfile$ sudo docker images
+REPOSITORY              TAG       IMAGE ID       CREATED        SIZE
+mysql                   latest    c71276df4a87   2 days ago     565MB
+phpmyadmin/phpmyadmin   latest    e4be0d1537f5   2 months ago   517MB
+
+ptdmitry@pt-linux:~/hw_dockerfile$ sudo docker build -t hello_py .
+[+] Building 254.4s (7/7) FINISHED
+ => [internal] load build definition from dockerfile                         0.0s
+ => => transferring dockerfile: 103B                                         0.0s
+ => [internal] load .dockerignore                                            0.0s
+ => => transferring context: 2B                                              0.0s
+ => [internal] load metadata for docker.io/library/python:latest             4.2s
+ => [internal] load build context                                            0.0s
+ => => transferring context: 29B                                             0.0s
+ => [1/2] FROM docker.io/library/python:latest@sha256:3a619e3c96fd4c5fc5e  249.4s
+ => => resolve docker.io/library/python:latest@sha256:3a619e3c96fd4c5fc5e19  0.1s
+ => => sha256:cbaa654007e0c2f2e2869ae69f9e9924826872d405c02 2.01kB / 2.01kB  0.0s
+ => => sha256:0a6cd0db41a4daebb332262ddd1f61a29e88169b8c934 7.52kB / 7.52kB  0.0s
+ => => sha256:6710592d62aa1338ac1c1c363dedc255659f666cc4 15.76MB / 15.76MB  18.9s
+ => => sha256:75256935197ed1bb3b994a77c01efa00349b901014 54.58MB / 54.58MB  74.1s
+ => => sha256:3a619e3c96fd4c5fc5e1998fd4dcb1f1403eb90c4c640 2.14kB / 2.14kB  0.0s
+ => => sha256:bd73737482dd5575526c7207872963479808d979a 55.05MB / 55.05MB  110.8s
+ => => sha256:c1e5026c64577dee4b6bac20b18196f964a41d8 196.85MB / 196.85MB  218.4s
+ => => sha256:f0016544b8b99a7e91472b231a8eb1af0aede28806ef 6.29MB / 6.29MB  81.9s
+ => => sha256:1d58eee51ff228a3e1f6abee482290e736c696025 19.99MB / 19.99MB  117.1s
+ => => sha256:93dc7b704cd18c44b49693575022ab7ebaf7bf9f186af30 243B / 243B  111.7s
+ => => extracting sha256:bd73737482dd5575526c7207872963479808d979ab2741c32  10.9s
+ => => sha256:caefdefa531e3b0d90aa4918fa072a441f0f0e57bc6 3.08MB / 3.08MB  120.1s
+ => => extracting sha256:6710592d62aa1338ac1c1c363dedc255659f666cc41441c7e0  1.0s
+ => => extracting sha256:75256935197ed1bb3b994a77c01efa00349b901014448a260  10.6s
+ => => extracting sha256:c1e5026c64577dee4b6bac20b18196f964a41d8b9016fbbba  25.8s
+ => => extracting sha256:f0016544b8b99a7e91472b231a8eb1af0aede28806efc821c6  1.2s
+ => => extracting sha256:1d58eee51ff228a3e1f6abee482290e736c696025d75a5a7b2  1.6s
+ => => extracting sha256:93dc7b704cd18c44b49693575022ab7ebaf7bf9f186af30ef5  0.0s
+ => => extracting sha256:caefdefa531e3b0d90aa4918fa072a441f0f0e57bc69f61212  0.9s
+ => [2/2] COPY hello.py /                                                    0.5s
+ => exporting to image                                                       0.1s
+ => => exporting layers                                                      0.1s
+ => => writing image sha256:a026402fd8680350166ab427f1393308bcefd7c702e5372  0.0s
+ => => naming to docker.io/library/hello_py                                  0.0s
+
+ptdmitry@pt-linux:~/hw_dockerfile$ sudo docker images
+REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
+hello_py                latest    a026402fd868   38 seconds ago   920MB
+mysql                   latest    c71276df4a87   2 days ago       565MB
+phpmyadmin/phpmyadmin   latest    e4be0d1537f5   2 months ago     517MB
+
+ptdmitry@pt-linux:~/hw_dockerfile$ sudo docker run hello_py
+Hello, World!
