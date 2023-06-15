@@ -1,3 +1,2 @@
-FROM python:latest
-COPY hello.py /
-CMD ["python3", "./hello.py"] 
+FROM mariadb:latest
+RUN apt-get update
